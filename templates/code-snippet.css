@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Code Pro', monospace;
+    background-color: #000000;
+    color: #dbe2f0;
+    display: flex;
+    font-size: 24px;
+}
+
+.container {
+    padding: 48px;
+    background: linear-gradient(
+        105.98deg,
+        #b200f8 0%,
+        #a537f8 20%,
+        #974ff9 40%,
+        #8760f9 60%,
+        #746ffa 80%,
+        #5c7cfa 100%
+    );
+}
+
+.code-table {
+    width: 100%;
+    padding: 0 16px;
+    border-spacing: 0px;
+}
+
+.window {
+    background-color: #1d212f;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    border-radius: 16px;
+    padding-bottom: 16px;
+    max-height: 1536px;
+    max-width: 1836px;
+    min-width: 1536px;
+    overflow: hidden;
+}
+
+.window-bar {
+    position: relative;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.window-close {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+}
+
+.window-title {
+    color: #a6b6d9;
+}
+
+.line,
+.code {
+    vertical-align: top;
+    padding: 0;
+}
+
+.line {
+    min-width: 1.5rem;
+    text-align: right;
+}
+
+.line::before {
+    content: attr(data-line);
+    color: #6d727c;
+}
+
+.code {
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding-left: 1rem;
+    width: 100%;
+}

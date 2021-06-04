@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            /*{fontStyle}*/
+
+            /*{highlightStyle}*/
+
+            /*{codeSnippetStyle}*/
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="window">
+                <div class="window-bar">
+                    <svg
+                        class="window-close"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="81"
+                        height="21"
+                        viewBox="0 0 54 14"
+                    >
+                        <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+                            <circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle>
+                            <circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle>
+                            <circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle>
+                        </g>
+                    </svg>
+                    <div class="window-title">{title}{range}</div>
+                </div>
+                <table class="code-table theme-dark">
+                    {code}
+                </table>
+            </div>
+        </div>
+        <script>
+            function fitContainerToAspectRatio(desiredAspectRatio) {
+                const container = document.querySelector('.container')
+                const existingContainerPadding = parseInt(getComputedStyle(container).padding) || 0
+                const containerRect = container.getBoundingClientRect()
+                const containerAspectRatio = containerRect.width / containerRect.height
+                if (containerAspectRatio > desiredAspectRatio) {
+                    const increaseHeightPx = containerRect.width / desiredAspectRatio - containerRect.height
+                    const halfIncreaseHeightWithExistingPaddingPx =
+                        Math.round(increaseHeightPx / 2) + existingContainerPadding
+                    container.style.padding = `${halfIncreaseHeightWithExistingPaddingPx}px ${existingContainerPadding}px`
+                } else {
+                    const increaseWidthPx = containerRect.height * desiredAspectRatio - containerRect.width
+                    const halfIncreaseWidthWidthExistingPaddingPx =
+                        Math.round(increaseWidthPx / 2) + existingContainerPadding
+                    container.style.padding = `${existingContainerPadding}px ${halfIncreaseWidthWidthExistingPaddingPx}px`
+                }
+            }
+        </script>
+    </body>
+</html>
