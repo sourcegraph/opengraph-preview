@@ -5,6 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
+    "gcp-build": "npm run build",
     "dev:start": "npm run build && node dist/index.js",
     "dev": "nodemon --watch src --watch templates -e ts,html,css --exec npm run dev:start",
     "start": "npm run build && functions-framework --target=cloudFunctionHandlePreviewRequest",
