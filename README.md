@@ -2,7 +2,7 @@
 
 Lifecycle:
 
-- Bot visits `http://localhost:3000/github.com/sourcegraph/go-diff/-/blob/diff/parse.go?hash=L29-35`
+- Bot visits `http://localhost:3000/github.com/sourcegraph/go-diff/-/blob/diff/parse.go?range=L29-35`
 - Extract the repository name, revision, and file path
 - Extract line range from the hash parameter
 - Fetch the highlighted range from the Sourcegraph API
@@ -19,4 +19,4 @@ Lifecycle:
 
 ## Development routes
 
-- Generates HTML (to screenshot): `http://localhost:3000/debug/html/github.com/sourcegraph/go-diff/-/blob/diff/parse.go?hash=L29-35`
+- Generates HTML (to screenshot): `http://localhost:3000/debug/html/github.com/sourcegraph/go-diff/-/blob/diff/parse.go?range=L29-35`
