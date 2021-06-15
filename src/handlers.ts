@@ -62,7 +62,14 @@ export async function handlePreviewRequest(req: express.Request, res: express.Re
     const { repositoryName, revision, filePath } = blobMatch
     const lineRange = matchRange(rangeParam)
 
-    const highlightedRange = await fetchHighlightedFileRange(repositoryName, revision, filePath, lineRange)
+    const requestUserAgent = req.get('user-agent')
+    const highlightedRange = await fetchHighlightedFileRange(
+        repositoryName,
+        revision,
+        filePath,
+        lineRange,
+        requestUserAgent
+    )
     if (!highlightedRange) {
         res.status(400).send('Bad request.')
         return
@@ -86,7 +93,14 @@ export async function handleDebugHtmlPreviewRequest(req: express.Request, res: e
     const { repositoryName, revision, filePath } = blobMatch
     const lineRange = matchRange(rangeParam)
 
-    const highlightedRange = await fetchHighlightedFileRange(repositoryName, revision, filePath, lineRange)
+    const requestUserAgent = req.get('user-agent')
+    const highlightedRange = await fetchHighlightedFileRange(
+        repositoryName,
+        revision,
+        filePath,
+        lineRange,
+        requestUserAgent
+    )
     if (!highlightedRange) {
         res.status(400).send('Bad request.')
         return

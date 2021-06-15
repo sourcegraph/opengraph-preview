@@ -1,13 +1,16 @@
 import fetch from 'node-fetch'
 import { SOURCEGRAPH_TOKEN, SOURCEGRAPH_URL } from './config'
 
-function fetchSourcegraphAPI<T>(body: string): Promise<T> {
+const USER_AGENT = 'SourcegraphOpenGraphPreviewService'
+
+function fetchSourcegraphAPI<T>(body: string, userAgent: string | undefined): Promise<T> {
     return fetch(`${SOURCEGRAPH_URL}/.api/graphql`, {
         method: 'post',
         body: body,
         headers: {
             'Content-Type': 'application/json',
             Authorization: `token ${SOURCEGRAPH_TOKEN}`,
+            'User-Agent': userAgent ?? USER_AGENT,
         },
     }).then(response => response.json())
 }
@@ -36,7 +39,8 @@ export function fetchHighlightedFileRange(
     repoName: string,
     commitID: string,
     filePath: string,
-    range: LineRange
+    range: LineRange,
+    userAgent: string | undefined
 ): Promise<string> {
     type Response = {
         data: {
@@ -61,6 +65,7 @@ export function fetchHighlightedFileRange(
                 filePath,
                 ranges: [range],
             },
-        })
+        }),
+        userAgent
     ).then(response => response.data.repository.commit.file.highlight.lineRanges[0].join(''))
 }
