@@ -58,8 +58,20 @@ body {
     left: 18px;
 }
 
+.sourcegraph-logo {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+}
+
 .window-title {
     color: #a6b6d9;
+    padding-left: 100px;
+    padding-right: 60px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .line,
