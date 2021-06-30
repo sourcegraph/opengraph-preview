@@ -9,14 +9,8 @@ const BLOB_REGEX = /\/(.*)\/-\/blob\/(.*)/
 const SINGLE_LINE_REGEX = /L(\d+)(:\d+)?/
 const LINE_RANGE_REGEX = /L(\d+)(:\d+)?-(\d+)(:\d+)?/
 
-type PreviewType = 'code' | 'symbol'
-
 function getRangeQueryParam(req: express.Request): string {
     return req.query.range ? (req.query.range as string) : ''
-}
-
-function getPreviewType(req: express.Request): PreviewType {
-    return req.query.type === 'symbol' ? 'symbol' : 'code'
 }
 
 function toZeroBasedLineRange(lineRange: LineRange): LineRange {
@@ -80,14 +74,13 @@ function isTwitterBot(req: express.Request): boolean {
 async function renderHtml(
     blobMatch: BlobMatch,
     lineRange: LineRange,
-    previewType: PreviewType,
     isRangeRequested: boolean,
     userAgent: string | undefined
 ): Promise<string | undefined> {
     const zeroBasedLineRange = toZeroBasedLineRange(lineRange)
     const { repositoryName, revision, filePath } = blobMatch
 
-    if (previewType === 'symbol' && typeof zeroBasedLineRange.startLineCharacter !== 'undefined') {
+    if (typeof zeroBasedLineRange.startLineCharacter !== 'undefined') {
         const hoverText = await fetchHoverMarkdownText(
             repositoryName,
             revision,
@@ -118,7 +111,6 @@ async function renderHtml(
 }
 
 export async function handlePreviewRequest(req: express.Request, res: express.Response) {
-    const previewType = getPreviewType(req)
     const rangeParam = getRangeQueryParam(req)
     const blobMatch = matchBlobPath(req.path)
     if (!blobMatch) {
@@ -128,7 +120,7 @@ export async function handlePreviewRequest(req: express.Request, res: express.Re
 
     const lineRange = matchRange(rangeParam)
     const requestUserAgent = req.get('user-agent')
-    const renderedHtml = await renderHtml(blobMatch, lineRange, previewType, !!rangeParam, requestUserAgent)
+    const renderedHtml = await renderHtml(blobMatch, lineRange, !!rangeParam, requestUserAgent)
     if (!renderedHtml) {
         res.status(400).send('Bad request.')
         return
@@ -139,8 +131,7 @@ export async function handlePreviewRequest(req: express.Request, res: express.Re
         JSON.stringify({
             severity: 'INFO',
             repository: blobMatch.repositoryName,
-            previewType,
-            httpRequest: { userAgent: req.get('user-agent') ?? '' },
+            httpRequest: { userAgent: requestUserAgent ?? '' },
         })
     )
 
@@ -149,7 +140,6 @@ export async function handlePreviewRequest(req: express.Request, res: express.Re
 }
 
 export async function handleDebugHtmlPreviewRequest(req: express.Request, res: express.Response) {
-    const previewType = getPreviewType(req)
     const reqPath = req.path.slice('/debug/html'.length)
     const rangeParam = getRangeQueryParam(req)
     const blobMatch = matchBlobPath(reqPath)
@@ -160,7 +150,7 @@ export async function handleDebugHtmlPreviewRequest(req: express.Request, res: e
 
     const lineRange = matchRange(rangeParam)
     const requestUserAgent = req.get('user-agent')
-    const renderedHtml = await renderHtml(blobMatch, lineRange, previewType, !!rangeParam, requestUserAgent)
+    const renderedHtml = await renderHtml(blobMatch, lineRange, !!rangeParam, requestUserAgent)
     if (!renderedHtml) {
         res.status(400).send('Bad request.')
         return
