@@ -13,6 +13,9 @@ const blobURLs = [
     '/github.com/sourcegraph/sourcegraph@01ed6ec/-/blob/cmd/frontend/graphqlbackend/repositories.go?range=L166-169',
     '/github.com/sourcegraph/sourcegraph@01ed6ec/-/blob/cmd/frontend/graphqlbackend/bigint.go?range=L10-40',
     '/github.com/sourcegraph/sourcegraph@01ed6ec/-/blob/cmd/frontend/graphqlbackend/search_contexts_test.go?range=L97',
+    '/github.com/sourcegraph/sourcegraph@b0661f50bb6fd8cf18142c36d638faaa8015a126/-/blob/enterprise/internal/database/perms_store.go?range=L165:22&type=symbol',
+    '/github.com/sourcegraph/sourcegraph@b0661f50bb6fd8cf18142c36d638faaa8015a126/-/blob/lib/codeintel/lsif/protocol/documentation.go?range=L124:6&type=symbol',
+    '/github.com/sourcegraph/sourcegraph@7ad85bfcbbf6041225dc0ace026236899b2954a0/-/blob/internal/database/basestore/store.go?range=L39:6&type=symbol',
 ]
 
 function fetchImage(url: string): Promise<Buffer> {

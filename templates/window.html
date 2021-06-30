@@ -9,7 +9,9 @@
 
             /*{highlightStyle}*/
 
-            /*{codeSnippetStyle}*/
+            /*{commonStyle}*/
+
+            /*{extraStyle}*/
         </style>
     </head>
     <body>
@@ -29,7 +31,7 @@
                             <circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle>
                         </g>
                     </svg>
-                    <div class="window-title">{title}{range}</div>
+                    <div class="window-title">{title}</div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 127" class="sourcegraph-logo">
                         <g fill="none" fill-rule="evenodd">
                             <path
@@ -47,9 +49,7 @@
                         </g>
                     </svg>
                 </div>
-                <table class="code-table theme-dark">
-                    {code}
-                </table>
+                {content}
             </div>
         </div>
         <script>

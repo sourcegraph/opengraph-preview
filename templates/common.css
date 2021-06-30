@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Code Pro', monospace;
+    background-color: #000000;
+    color: #dbe2f0;
+    display: flex;
+    font-size: 24px;
+}
+
+.container {
+    padding: 48px;
+    background: linear-gradient(
+        105.98deg,
+        #b200f8 0%,
+        #a537f8 20%,
+        #974ff9 40%,
+        #8760f9 60%,
+        #746ffa 80%,
+        #5c7cfa 100%
+    );
+}
+
+.window {
+    background-color: #1d212f;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    border-radius: 16px;
+    padding-bottom: 16px;
+    max-height: 1536px;
+    max-width: 1836px;
+    min-width: 1536px;
+    overflow: hidden;
+}
+
+.window-bar {
+    position: relative;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.window-close {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+}
+
+.sourcegraph-logo {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+}
+
+.window-title {
+    color: #a6b6d9;
+    padding-left: 100px;
+    padding-right: 60px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.content {
+    width: 100%;
+    padding: 0 16px;
+}

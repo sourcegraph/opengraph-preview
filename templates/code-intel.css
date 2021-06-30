@@ -1,0 +1,8 @@
+a {
+    color: inherit !important;
+}
+
+pre,
+code {
+    font-family: 'Source Code Pro', monospace !important;
+}
